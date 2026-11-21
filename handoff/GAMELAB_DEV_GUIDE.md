@@ -113,7 +113,7 @@ O‘yinlar **kurslarga bog‘langan**, lekin faqat katalog darajasida (shartnoma
 
 ### 3.3 O‘yin kartasi va holatlar
 
-Tarkib: cover (16:9), holat belgisi, nom, kurs yorlig‘i va **sinf yorlig‘i** (`3–5-sinf` yoki `2-sinf`; kurs yorlig‘i yonida, bir qatorda, kerak bo‘lsa pastga o‘tadi), 1–2 qatorli tavsif, progress (o‘ynalgan bo‘lsa), qiyinlik belgisi (Oson / O‘rtacha / Qiyin), tugma.
+Tarkib: cover (16:9), holat belgisi, nom, kurs yorlig‘i va **sinf yorlig‘i** (`3–5-sinf` yoki `2-sinf`; kurs yorlig‘i yonida, bir qatorda, kerak bo‘lsa pastga o‘tadi), 1–2 qatorli tavsif, progress (o‘ynalgan bo‘lsa), qiyinlik belgisi (Oson / O‘rtacha / Qiyin) va **bitta 3D tugma** (matn + ikonka birga: `O‘ynash ▶`, `Davom etish ▶`, `Yana o‘ynash ▶`, `Qayta o‘ynash ↻`, bloklangan holatda kulrang `Bloklangan 🔒`). Alohida yumaloq ikonka tugma yo‘q. Ixcham "Davom ettirish" kartasida ham xuddi shu tugma ishlatiladi; mobilda (≤ 640 px) u kartaning pastida butun kenglikda turadi. Tugma balandligi ≥ 44 px. Karta tugmasi rangi Figma'dagi `#F2541B` (qirra `#C23E11`); oq matn bilan kontrast ~3.5:1 — qalin 14 px matn uchun katta matn chegarasidan biroz past, shuning uchun IT bu rangni alohida tasdiqlashi kerak.
 
 Holat **platforma tomonidan** `progress` va manifest'dan hisoblanadi (shartnoma 8.1-bo‘lim):
 
