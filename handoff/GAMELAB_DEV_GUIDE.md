@@ -109,7 +109,7 @@ O‘yinlar **kurslarga bog‘langan**, lekin faqat katalog darajasida (shartnoma
 | "Davom ettirish" | `in_progress` va `played` holatidagi o‘yinlar, oxirgi o‘ynalgani birinchi (ko‘pi bilan 2 ta). Bo‘sh bo‘lsa bo‘lim yashiriladi. Tugma o‘yinni **ochadi**, o‘yin ichidagi joyni **tiklamaydi** (checkpoint asosiy shartnomada yo‘q). |
 | "Siz uchun tavsiya etiladi" | Holati `new`, o‘quvchining kurslaridan, bloklanmagan o‘yinlar. "Davom ettirish" bilan ID kesishmaydi. Muharrir bayrog‘i (`recommended`) tartibda yuqoriga chiqaradi. Bo‘sh bo‘lsa bo‘lim yashiriladi. |
 | Saralash | Tavsiya bo‘yicha (o‘quvchining kurslari avval), Yangi, Nomi bo‘yicha. |
-| Filtr oynasi | Kurs, Holat, Qiyinchilik, "Faqat tavsiya etilganlar"; `Tozalash` va `Natijalarni ko‘rish`. |
+| Filtr oynasi | Kurs, Holat, Qiyinchilik, **Sinf** (1–11; o‘yin tanlangan sinfni qamrab olsa chiqadi: `gradeFrom ≤ n ≤ gradeTo`), "Faqat tavsiya etilganlar"; `Tozalash` va `Natijalarni ko‘rish`. |
 
 ### 3.3 O‘yin kartasi va holatlar
 
