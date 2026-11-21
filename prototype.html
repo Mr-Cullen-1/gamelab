@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F3F3F8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Cpath%20fill%3D%22%23FF6A1A%22%20d%3D%22M5%207Q5%202%2010%206L18%2012H30L38%206Q43%202%2043%208V29Q42%2037%2024%2044Q6%2037%205%2029Z%22%2F%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M12%2026q5-8%2010%200-5%204-10%200m14%200q5-8%2010%200-5%204-10%200%22%2F%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22m21%2034%203%203%203-3Z%22%2F%3E%3C%2Fsvg%3E">
+  <title>GameLab — Junior Academy</title>
+  <style>/* STYLES */</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="junior-icon" viewBox="0 0 48 48"><path fill="#FF6A1A" d="M5 7Q5 2 10 6L18 12H30L38 6Q43 2 43 8V29Q42 37 24 44Q6 37 5 29Z"/><path fill="#fff" d="M12 26q5-8 10 0-5 4-10 0m14 0q5-8 10 0-5 4-10 0"/><path fill="#fff" d="m21 34 3 3 3-3Z"/></symbol></svg>
+  <a class="skip-link" href="#catalog">O‘yinlarga o‘tish</a>
+  <header class="header">
+    <div class="nav-shell">
+      <button class="icon-button menu-toggle" data-action="menu" aria-label="Menyuni ochish"><i data-icon="menu"></i></button>
+      <a class="brand" href="#" aria-label="Junior — GameLab">
+        <svg width="44" height="44" aria-hidden="true"><use href="#junior-icon"/></svg>
+        <span>Junior</span>
+      </a>
+      <nav class="main-nav" aria-label="Asosiy navigatsiya">
+        <button data-action="schedule">Dars jadvali</button>
+        <button data-action="achievements">Mening yutuqlarim</button>
+        <button class="active" data-action="home" aria-current="page"><i data-icon="gamepad"></i> GameLab</button>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-button notification" data-action="notifications" aria-label="Bildirishnomalar"><i data-icon="bell"></i><b></b></button>
+        <button class="profile" data-action="profile" aria-label="Alisher profilini ochish"><span class="avatar">A</span><span class="profile-name">Alisher<small>6-sinf o‘quvchisi</small></span><i data-icon="chevron"></i></button>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy"><span class="eyebrow"><span></span> BILIM OLISHNING QIZIQARLI TOMONI</span><h1 id="page-title"><i data-icon="gamepad"></i>Game<span>Lab</span></h1><p>Kurslaring bo‘yicha qiziqarli o‘yinlar o‘yna,<br class="desktop-break"> bilimlaringni mustahkamla!</p></div>
+      <div class="hero-art" aria-hidden="true"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="art-plus">✦</span><img data-asset="robot" class="hero-robot" alt=""><span class="hello">O‘ynab o‘rganamiz! <span>✧</span></span><span class="art-dot"></span></div>
+    </section>
+    <div class="course-strip" id="courses" aria-label="Kurs bo‘yicha barcha bo‘limlarni filtrlash"></div>
+    <section id="continue-section" class="game-section"><div class="section-heading"><div class="section-title"><span class="section-icon orange"><i data-icon="play-circle"></i></span><h2>Davom ettirish</h2><span class="count" id="continue-count"></span></div><button class="text-button" data-action="see-continue">Barchasini ko‘rish <i data-icon="arrow"></i></button></div><div id="continue-grid" class="continue-grid"></div></section>
+    <section id="recommend-section" class="game-section"><div class="section-heading"><div class="section-title"><span class="section-icon"><i data-icon="sparkles"></i></span><h2>Siz uchun tavsiya etiladi</h2><button class="small-info" data-action="recommend-info" aria-label="Tavsiyalar haqida"><i data-icon="info"></i></button></div><button class="text-button" data-action="see-recommended">Barchasini ko‘rish <i data-icon="arrow"></i></button></div><p class="section-subtitle" id="recommend-note">Yangi sarguzashtlar, yangi bilimlar. Birinchisini tanla!</p><div id="recommend-grid" class="game-grid recommendations"></div></section>
+    <section id="catalog" class="game-section catalog" aria-labelledby="catalog-title"><div class="section-heading"><div class="section-title"><span class="section-icon orange"><i data-icon="gamepad"></i></span><h2 id="catalog-title">Barcha o‘yinlar</h2><span class="count" id="catalog-count" aria-live="polite"></span></div><span class="catalog-hint">Har bir o‘yin — yangi bir kashfiyot</span></div>
+      <div class="catalog-toolbar"><label class="search-box"><i data-icon="search"></i><input id="search" type="search" placeholder="O‘yin qidirish..." aria-label="O‘yin nomini qidirish" autocomplete="off"><button id="clear-search" class="icon-button" aria-label="Qidiruvni tozalash" hidden><i data-icon="x"></i></button></label><button class="secondary filter-button" data-action="filters"><i data-icon="filter"></i> Filtrlar <span id="filter-count" hidden></span></button><div class="toolbar-end"><label class="sort-label"><span>Saralash:</span><select id="sort" aria-label="O‘yinlarni saralash"><option value="recommended">Tavsiya bo‘yicha</option><option value="newest">Yangi</option><option value="name">Nomi bo‘yicha</option></select></label><div class="view-switch" aria-label="Katalog ko‘rinishi"><button class="icon-button selected" data-view="grid" aria-label="Katak ko‘rinishi" aria-pressed="true"><i data-icon="grid"></i></button><button class="icon-button" data-view="list" aria-label="Ro‘yxat ko‘rinishi" aria-pressed="false"><i data-icon="list"></i></button></div></div></div>
+      <div id="active-filters" class="active-filters"></div><div id="catalog-grid" class="game-grid"></div><div id="catalog-bottom" class="catalog-bottom"></div>
+    </section>
+    <footer><span><svg class="foot-logo" aria-hidden="true"><use href="#junior-icon"/></svg><strong>Junior</strong><span class="footer-dot">·</span> O‘yin orqali katta kashfiyotlar.</span><button class="prototype-button" data-action="prototype"><span></span> Interaktiv prototip · B variant <i data-icon="sliders"></i></button></footer>
+  </main>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+  <dialog id="player" class="player" aria-label="O‘yin darsi"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>/* ASSETS */</script>
+  <script>/* APP */</script>
+</body>
+</html>

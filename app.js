@@ -1,0 +1,185 @@
+'use strict';
+const $ = (s, root = document) => root.querySelector(s);
+const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+const iconPaths = {
+  gamepad:'<path d="M6 7h12c2 0 3 2 3.5 5l.5 4c.5 3-2 4-4 2l-2-2H8l-2 2c-2 2-4.5 1-4-2l.5-4C3 9 4 7 6 7Z"/><path d="M7 10v5m-2.5-2.5h5M16 11h.01M19 14h.01"/>',
+  menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/>',
+  bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M9 21h6"/>',
+  chevron:'<path d="m7 10 5 5 5-5"/>',
+  arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',
+  'play-circle':'<circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4Z"/>',
+  play:'<path d="m8 4 12 8-12 8Z"/>',
+  sparkles:'<path d="m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8L12 2Zm7 0v4m-2-2h4"/>',
+  search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
+  filter:'<path d="M3 4h18l-7 8v7l-4 2V12Z"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  list:'<path d="M9 5h12M9 12h12M9 19h12M3 5h1M3 12h1M3 19h1"/>',
+  x:'<path d="m6 6 12 12M6 18 18 6"/>',
+  lock:'<rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/>',
+  check:'<path d="m5 12 4 4L20 5"/>',
+  replay:'<path d="M3 10a9 9 0 1 1 2 8M3 3v7h7"/>',
+  sliders:'<path d="M4 6h4m6 0h6M4 18h10m5 0h1"/><circle cx="11" cy="6" r="3"/><circle cx="16" cy="18" r="3"/>',
+  trophy:'<path d="M7 3h10v7a5 5 0 0 1-10 0V3Zm5 12v6m-4 0h8M7 5H3v3a4 4 0 0 0 4 4m10-7h4v3a4 4 0 0 1-4 4"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h2m4 0h2"/>',
+  alert:'<path d="m12 3 10 18H2L12 3Zm0 6v5m0 3h.01"/>'
+};
+function icon(name){return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[name] || iconPaths.gamepad}</svg>`}
+function mountIcons(root=document){$$('[data-icon]',root).forEach(el=>el.outerHTML=icon(el.dataset.icon));$$('[data-asset]',root).forEach(el=>el.src=ASSETS[el.dataset.asset]);}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const courses=[['math','Matematika','math'],['english','Ingliz tili','english'],['code','Dasturlash','code'],['robotics','Robototexnika','robotIcon'],['digital','Raqamli ko‘nikmalar','computer'],['logic','Mantiq','puzzle']].map(([id,name,asset])=>({id,name,asset}));
+const courseById=Object.fromEntries(courses.map(c=>[c.id,c]));
+const statusNames={new:'Yangi',in_progress:'Davom etmoqda',played:'O‘ynalgan',completed:'Bajarilgan',locked:'Bloklangan'};
+const statusLabel=k=>k==='continue'?'Davom etayotganlar':statusNames[k];
+// Demo student: the courses the student is enrolled in drive the recommendations.
+const student={name:'Alisher',courses:['math','code']};
+const difficultyNames={easy:'Oson',medium:'O‘rtacha',hard:'Qiyin'};
+// All course and game metadata live here; replace this demo config with an LMS response.
+const gameData=[
+ ['blocks','Blok pazl','math','blocks','Rangli bloklarni joyla va mantiqiy fikrlashingni charxla!','easy',1],
+ ['race','Sonlar poygasi','math','rocket','Tez hisobla, yulduzlar sari uch va marraga birinchi yet!','medium',2],
+ ['geometry','Geometriya Siti','math','geometry','Shakllarni kashf et va o‘z bilimlar shahringni qur!','easy',0,true],
+ ['bridge','Matematik yo‘l','math','bridge','Misollarni yech va yangi orollarga yo‘l och!','medium',0,true],
+ ['code-world','Kodlab ko‘r','code','laptop','Birinchi kodingni yoz. Katta g‘oyalar kichik qadamdan!','easy',0,true],
+ ['robot','Robotni boshqar','robotics','robot','Buyruqlarni to‘g‘ri tuz va robotni manzilga yetkaz!','easy',0,true],
+ ['words','So‘zlar sayyorasi','english','words','Yangi inglizcha so‘zlarni qiziqarli o‘yin bilan o‘rgan.','easy',0],
+ ['puzzle','Mantiq labirinti','logic','maze','Yashirin qonuniyatni top va labirintdan chiq!','medium',0],
+ ['safe','Internet qahramoni','digital','shield','Xavfsiz internet olamida to‘g‘ri qarorlar qabul qil.','easy',3],
+ ['fractions','Kasrlar oshxonasi','math','geometry','Bo‘laklarni birlashtir va kasrlarning sirini och.','hard',0,false,'geometry'],
+ ['english-quest','So‘z ovchisi','english','words','Rasmga mos so‘zni top va lug‘atingni boyit.','easy',0],
+ ['algorithm','Algoritm ustasi','code','laptop','Qadamlarni to‘g‘ri tartibla va yechimga yetib bor.','medium',0],
+ ['memory','Xotira kartalari','logic','blocks','Ketma-ketliklarni eslab qol va diqqatingni sinab ko‘r.','easy',0],
+ ['sensor','Sensorlar olami','robotics','robot','Robotning ko‘zi va qulog‘i qanday ishlashini o‘rgan.','medium',0],
+ ['keyboard','Klaviatura ustasi','digital','laptop','Tugmalar va foydali buyruqlar bilan do‘stlash.','easy',0],
+ ['colors','Ranglar olami','english','words','Ranglarning inglizcha nomlarini birga o‘rganamiz.','easy',0,true],
+ ['space','Kosmik hisob','math','rocket','Hisoblash mahorating bilan koinotni kashf et.','hard',0],
+ ['logic-bridge','Aql ko‘prigi','logic','bridge','Har bir to‘g‘ri javob bilan yangi ko‘prik qur.','medium',0,true],
+ ['loops','Takrorlash sehri','code','laptop','Sikllarni o‘rgan va murakkab vazifalarni osonlashtir.','hard',0,false,'code-world'],
+ ['robot-build','Robot konstruktor','robotics','robot','Kerakli detallarni tanla va robotingni yig‘.','hard',0,false,'robot'],
+ ['files','Fayllar shahri','digital','shield','Fayllarni tanib ol va raqamli olamni tartibga sol.','medium',0,true],
+ ['sentence','Gap tuzuvchi','english','words','So‘zlarni birlashtirib to‘g‘ri gaplar tuz.','medium',0],
+ ['patterns','Naqshlar siri','logic','maze','Shakllar ortidagi mantiqni ilg‘a va davom ettir.','medium',0],
+ ['robot-route','Robot sayohati','robotics','robot','To‘siqlardan o‘tish uchun eng yaxshi yo‘lni tanla.','medium',0]
+];
+// kind 'level' = games with levels (3 demo levels); kind 'free' = no levels (result is "finished"). See GAMELAB_DEV_GUIDE.md.
+const FREE_IDS=new Set(['memory','colors','keyboard','patterns']);
+// Recommended school grades per game: [from, to] (1–11). Shown on every card as "3–4-sinf"; replace with LMS metadata.
+const GRADES={blocks:[1,4],race:[2,4],geometry:[3,5],bridge:[3,5],'code-world':[5,7],robot:[4,6],words:[1,4],puzzle:[4,6],safe:[5,8],fractions:[5,6],'english-quest':[2,5],algorithm:[6,8],memory:[1,4],sensor:[6,8],keyboard:[3,6],colors:[1,2],space:[5,7],'logic-bridge':[4,7],loops:[7,9],'robot-build':[7,9],files:[4,6],sentence:[4,6],patterns:[3,6],'robot-route':[5,7]};
+const gradeText=g=>g.grades[0]===g.grades[1]?`${g.grades[0]}-sinf`:`${g.grades[0]}–${g.grades[1]}-sinf`;
+const games=gameData.map(([id,title,course,art,description,difficulty,done,recommended=false,requires=null],index)=>{const kind=FREE_IDS.has(id)?'free':'level';return {id,title,course,courseIds:[course],grades:GRADES[id],art,description,difficulty,recommended,requires,order:index,kind,levelIds:kind==='level'?['l1','l2','l3']:[]}});
+const STORAGE='junior-gamelab-prototype-b-v3';
+const initial=()=>{const T=Date.now(),iso=ms=>new Date(T-ms).toISOString();
+ const res=(first,dur,outcome='success',ago=0)=>({outcome,metrics:{steps:15,firstTryGroups:first,mistakes:6-first},durationSeconds:dur,endedAt:iso(ago)});
+ return {g:{
+  blocks:{attempts:3,completed:['l1'],last:{outcome:'aborted',metrics:{steps:8,mistakes:2},durationSeconds:140,endedAt:iso(86400e3)},best:res(4,285,'success',3*86400e3),lastAt:T-86400e3},
+  race:{attempts:3,completed:['l1','l2'],last:res(3,270,'success',3600e3),best:res(5,240,'success',2*86400e3),lastAt:T-3600e3},
+  safe:{attempts:4,completed:['l1','l2','l3'],last:res(6,300,'success',5*86400e3),best:res(6,255,'success',5*86400e3),lastAt:T-5*86400e3},
+  memory:{attempts:4,completed:[],last:res(4,330,'finished',2*86400e3),best:res(5,290,'finished',3*86400e3),lastAt:T-2*86400e3}
+ },muted:false}};
+let saved=initial();
+try { const raw=JSON.parse(localStorage.getItem(STORAGE));if(raw&&raw.g&&typeof raw.g==='object'){saved={...saved,...raw};for(const g of games){const s=saved.g[g.id];if(s){s.attempts=Math.max(0,Number(s.attempts)||0);s.completed=Array.isArray(s.completed)?s.completed.filter(l=>g.levelIds.includes(l)):[]}}} }catch{}
+let globalCourse='all',query='',filters={course:'all',status:'all',difficulty:'all',recommended:false},sort='recommended',view='grid',limit=8,catalogState='ready',loadingTimer,toastTimer;
+function save(){try{localStorage.setItem(STORAGE,JSON.stringify(saved))}catch{toast('Brauzer saqlashga ruxsat bermadi. Natijalar faqat shu sahifada qoladi.')}}
+function sc(g){return saved.g[g.id]||{attempts:0,completed:[]}}
+function doneCount(g){return sc(g).completed.length}
+function hasStarted(g){return sc(g).attempts>0}
+function enrolled(g){return g.courseIds.some(c=>student.courses.includes(c))}
+function isLocked(g){const r=g.requires&&games.find(x=>x.id===g.requires);return !!r&&status(r)!=='completed'}
+function status(g){if(isLocked(g))return 'locked';if(g.kind==='level'&&doneCount(g)>=g.levelIds.length)return 'completed';if(!hasStarted(g))return 'new';return g.kind==='level'?'in_progress':'played'}
+function recommendedGame(g){return status(g)==='new'&&enrolled(g)}
+function courseLabel(g){const c=courseById[g.course];return `<span class="course-label"><img src="${ASSETS[c.asset]}" alt="">${c.name}</span>`}
+function gradeLabel(g){return `<span class="course-label grade-label" title="Tavsiya etilgan sinf">${gradeText(g)}</span>`}
+function metaTags(g){return `<div class="card-tags">${courseLabel(g)}${gradeLabel(g)}</div>`}
+function progressBlock(g){const s=sc(g);
+ if(g.kind==='level'){const n=g.levelIds.length,d=doneCount(g);return `<div class="progress-row"><div class="progress-track" role="progressbar" aria-label="${esc(g.title)} darajalari" aria-valuenow="${d}" aria-valuemin="0" aria-valuemax="${n}">${g.levelIds.map((_,i)=>`<i class="${i<d?'on':''}"></i>`).join('')}</div><span>${d}/${n} daraja</span></div>`}
+ return `<div class="rekord-row">${icon('trophy')}<span>${s.best?`Rekord: <b>${s.best.metrics.firstTryGroups}/6</b>`:'Rekord yo‘q'}</span><span>${s.attempts} marta</span></div>`}
+let artNumber=0;
+function artwork(type){
+ const uid=`a${artNumber++}`;
+ const themes={blocks:['#382075','#9160ed'],geometry:['#41319f','#a18aff'],bridge:['#48b3ef','#b2edff'],rocket:['#181845','#6552c5'],laptop:['#5e2baf','#bf83ff'],robot:['#7654d9','#cbb5ff'],words:['#df4c99','#ffc0d7'],maze:['#006979','#62d8c5'],shield:['#246db8','#97c8ff']};
+ const [top,bottom]=themes[type]||themes.blocks;
+ const cube=(x,y,s,color)=>`<g transform="translate(${x} ${y})"><path d="M0 0 ${s} ${-s*.35} ${s*1.6} 0 ${s*.6} ${s*.35}Z" fill="${color}" filter="url(#${uid}light)"/><path d="M0 0 ${s*.6} ${s*.35} ${s*.6} ${s*1.35} 0 ${s}Z" fill="${color}"/><path d="m${s*.6} ${s*.35} ${s} ${-s*.35}v${s}l${-s} ${s*.35}Z" fill="${color}" filter="url(#${uid}dark)"/><path d="M1 1 ${s*.6} ${s*.35+1} ${s*1.6-1} 1M${s*.6} ${s*.35}v${s}" fill="none" stroke="#ffffff66" stroke-width="1.5"/></g>`;
+ let content='';
+ if(type==='blocks'){content=`<ellipse cx="174" cy="161" rx="102" ry="17" fill="#28146044"/>${cube(195,83,40,'#9b5bff')}${cube(131,112,40,'#aa64ff')}${cube(171,98,40,'#a660ff')}${cube(195,43,40,'#b278ff')}${cube(91,83,36,'#ffae15')}${cube(91,47,36,'#ffc42b')}${cube(127,34,36,'#ffbd22')}${cube(66,132,33,'#81d72c')}`}
+ if(type==='geometry'){content=`<ellipse cx="167" cy="164" rx="94" ry="13" fill="#36246c33"/>${cube(103,109,60,'#ffc42a')}${cube(123,56,47,'#9364f3')}<path d="m151 17-26 43h61Z" fill="#ffb542" stroke="#ffe47a" stroke-width="6" stroke-linejoin="round"/><path d="m153 30-12 22h29Z" fill="#6440af"/>${cube(199,118,35,'#8ad92b')}<path d="m151 79 8 9-8 9-8-9Z" fill="white" opacity=".9"/><path d="m128 126 8 9-8 9-8-9Z" fill="none" stroke="#fff2a8" stroke-width="2"/>`}
+ if(type==='bridge'){content=`<g fill="#fff" opacity=".9"><ellipse cx="54" cy="42" rx="27" ry="8"/><circle cx="49" cy="34" r="12"/><ellipse cx="267" cy="34" rx="25" ry="8"/><circle cx="265" cy="27" r="11"/></g><path d="m40 142 15 30 40 5 16-35m118-16 14 33 32-4 13-29" fill="#aa663c"/><ellipse cx="75" cy="140" rx="44" ry="15" fill="#7acc2e"/><ellipse cx="259" cy="126" rx="37" ry="13" fill="#8ee147"/><path d="M87 139Q156 11 245 128" fill="none" stroke="#7b8096" stroke-width="34"/><path d="M87 132Q157 7 245 121" fill="none" stroke="#e5e7ee" stroke-width="24"/><path d="M87 132Q157 7 245 121" fill="none" stroke="#b3b5c4" stroke-width="16"/><g fill="#ffa324" font-family="Arial" font-weight="bold" font-size="27"><text x="113" y="102">+</text><text x="155" y="77">+</text><text x="202" y="99">+</text></g><path d="M266 116V60" stroke="#a86b39" stroke-width="5"/><path d="M268 60q17-13 37-1l-8 10 8 9q-20-8-37 1" fill="#ff8b23"/><ellipse cx="64" cy="132" rx="12" ry="18" fill="#42b94c"/><ellipse cx="86" cy="142" rx="15" ry="9" fill="#4bc547"/>`}
+ if(type==='rocket'){content=`<g fill="#e3ceff"><circle cx="44" cy="30" r="2"/><circle cx="282" cy="63" r="2"/><circle cx="219" cy="20" r="1.5"/><path d="m74 51 2 6 6 2-6 2-2 6-2-6-6-2 6-2Z"/></g><g transform="translate(171 94) rotate(42)"><path d="m-17 41 0 39 17-15 17 15V41" fill="#ff981d"/><path d="m-8 42 0 30 8-10 8 10V42" fill="#ffe96a"/><path d="m-19 7-19 30 18-5m39-25 19 30-18-5" fill="#ff7545"/><path d="M0-72Q-39-37-24 37Q0 49 24 37 39-37 0-72Z" fill="url(#${uid}metal)" stroke="#c1b1da" stroke-width="1.5"/><path d="M0-72Q-18-58-23-37h46Q18-58 0-72" fill="#ff773e"/><circle cy="-6" r="17" fill="#e97235"/><circle cy="-6" r="13" fill="#42c7fa" stroke="#cef5ff" stroke-width="3"/><path d="M-24 34Q0 43 24 34l-1 8q-23 9-46 0Z" fill="#9b91b7"/></g><g fill="#a48bf4" opacity=".8"><circle cx="20" cy="180" r="44"/><circle cx="58" cy="182" r="32"/><circle cx="293" cy="182" r="26"/></g><g fill="#fff" font-size="22" font-weight="900" font-family="Nunito,Arial"><text x="44" y="106" transform="rotate(-10 44 106)">24</text><text x="254" y="145" transform="rotate(10 254 145)">36</text></g>`}
+ if(type==='laptop'){content=`<ellipse cx="169" cy="162" rx="108" ry="13" fill="#401a722f"/><g transform="rotate(-6 160 100)"><rect x="86" y="31" width="155" height="105" rx="12" fill="#6331ce" stroke="#c7a2ff" stroke-width="4"/><rect x="95" y="40" width="137" height="85" rx="6" fill="url(#${uid}screen)"/><path d="m86 137-25 24q0 7 9 8h188q9-1 9-8l-26-24Z" fill="#9e70ef" stroke="#caabff" stroke-width="2"/><path d="m102 143-9 9h130l-8-9Z" fill="#7545b5"/><rect x="145" y="157" width="39" height="5" rx="2" fill="#c8a9ff"/><path d="m142 70-17 13 17 13m43-26 17 13-17 13m-16-33-10 46" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g><g fill="#dec5ff"><path d="m50 52 4 9 9 4-9 4-4 9-4-9-9-4 9-4Z"/><circle cx="272" cy="98" r="4"/></g>`}
+ if(type==='robot'){content=`<ellipse cx="173" cy="164" rx="88" ry="14" fill="#54398b22"/><image href="${ASSETS.robotWave}" x="75" y="-11" width="195" height="195"/><rect x="41" y="47" width="42" height="32" rx="9" fill="#ffffffbb" transform="rotate(-13 41 47)"/><path d="m54 60 6 6 11-13" fill="none" stroke="#7c3aed" stroke-width="4"/><circle cx="269" cy="105" r="16" fill="#e1cdff"/><path d="m263 105 4 4 8-9" fill="none" stroke="#9264de" stroke-width="3"/>`}
+ if(type==='words'){content=`<ellipse cx="165" cy="162" rx="90" ry="13" fill="#9b286d22"/><g transform="rotate(-12 116 97)"><rect x="71" y="51" width="87" height="97" rx="20" fill="#dd327f"/><rect x="71" y="44" width="87" height="97" rx="20" fill="#fff3f8" stroke="#fff" stroke-width="3"/><text x="114" y="116" fill="#ee4d91" font-size="71" font-family="Nunito,Arial" text-anchor="middle" font-weight="900">A</text></g><g transform="rotate(13 206 110)"><rect x="170" y="75" width="76" height="80" rx="17" fill="#8d45cf"/><rect x="170" y="69" width="76" height="80" rx="17" fill="#ab65eb" stroke="#dab1ff" stroke-width="2"/><text x="209" y="130" fill="#fff" font-size="62" text-anchor="middle" font-family="Nunito,Arial" font-weight="900">a</text></g><path d="m256 32 4 11 11 4-11 4-4 11-4-11-11-4 11-4Z" fill="#ffe590"/>`}
+ if(type==='maze'){content=`<g transform="translate(72 23) skewY(-9)"><rect width="181" height="145" rx="20" fill="#126777"/><rect y="-7" width="181" height="145" rx="20" fill="#a4eee0" stroke="#d4fff5" stroke-width="3"/><path d="M20 18h100v27H50v31h55v39H20V52m141-34v60h-32V55m32 42v20h-34M78 18v27m-58 58h30m55-27h24" stroke="#31b3a2" stroke-width="11" fill="none" stroke-linejoin="round"/><circle cx="20" cy="25" r="10" fill="#ffc036" stroke="#ffed9a" stroke-width="3"/><path d="m151 105 4 8 9 1-7 6 2 8-8-4-8 4 2-8-7-6 9-1Z" fill="#ffb524"/></g>`}
+ if(type==='shield'){content=`<ellipse cx="167" cy="167" rx="85" ry="11" fill="#164a8722"/><path d="m165 24 64 24v49q-5 45-64 66-59-21-64-66V48Z" fill="#5ca0ef" stroke="#c5edff" stroke-width="5"/><path d="m165 39 49 19v38q-5 34-49 53-44-19-49-53V58Z" fill="#4c84da"/><path d="m140 94 18 18 33-38" fill="none" stroke="#dcfbff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="m59 48 3 9 9 3-9 3-3 9-3-9-9-3 9-3m207 61 3 9 9 3-9 3-3 9-3-9-9-3 9-3" fill="#c6ebff"/>`}
+ return `<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc({blocks:'Rangli uch o‘lchamli bloklar',geometry:'Geometrik shakllar minorasi',bridge:'Suzuvchi orollar orasidagi ko‘prik',rocket:'Yulduzlar orasidagi raketa',laptop:'Kod yozilayotgan noutbuk',robot:'Junior robot yordamchisi',words:'Rangli harf kartalari',maze:'Mantiqiy labirint',shield:'Raqamli xavfsizlik qalqoni'}[type])}"><defs><linearGradient id="${uid}bg" x2=".9" y2="1"><stop stop-color="${top}"/><stop offset="1" stop-color="${bottom}"/></linearGradient><linearGradient id="${uid}metal"><stop stop-color="#d9d8f5"/><stop offset=".4" stop-color="#fff"/><stop offset="1" stop-color="#bbb7e2"/></linearGradient><linearGradient id="${uid}screen" x2="1" y2="1"><stop stop-color="#52d9ff"/><stop offset="1" stop-color="#5e60ef"/></linearGradient><filter id="${uid}light"><feComponentTransfer><feFuncR type="linear" slope="1.16"/><feFuncG type="linear" slope="1.16"/><feFuncB type="linear" slope="1.16"/></feComponentTransfer></filter><filter id="${uid}dark"><feComponentTransfer><feFuncR type="linear" slope=".81"/><feFuncG type="linear" slope=".81"/><feFuncB type="linear" slope=".81"/></feComponentTransfer></filter></defs><rect width="320" height="180" fill="url(#${uid}bg)"/><circle cx="293" cy="17" r="88" fill="#fff" opacity=".04"/><circle cx="8" cy="172" r="62" fill="#fff" opacity=".05"/>${content}</svg>`;
+}
+function card(g,compact=false){
+ const st=status(g),locked=st==='locked',label=st==='completed'?'Qayta o‘ynash':st==='in_progress'?'Davom etish':st==='played'?'Yana o‘ynash':'O‘ynash';
+ if(compact)return `<article class="continue-card" data-game="${g.id}"><div class="continue-art">${artwork(g.art)}</div><div class="continue-info"><div class="continue-top"><h3>${g.title}</h3></div>${metaTags(g)}${progressBlock(g)}</div><button class="round-play" data-open="${g.id}" aria-label="${g.title} — davom etish">${icon('play')}</button></article>`;
+ return `<article class="game-card" data-game="${g.id}" data-status="${st}"><div class="game-cover"><div class="cover-art">${artwork(g.art)}</div><span class="status-badge ${st}">${st==='completed'?icon('check'):st==='locked'?icon('lock'):''}${statusNames[st]}</span>${locked?`<div class="lock-overlay">${icon('lock')}</div>`:''}</div><div class="card-body"><h3>${g.title}</h3>${metaTags(g)}<p class="card-description">${g.description}</p>${hasStarted(g)?`<div class="card-progress">${progressBlock(g)}</div>`:''}${locked?`<p class="card-lock-note">Avval “${games.find(x=>x.id===g.requires).title}”ni yakunla.</p>`:''}<div class="card-bottom"><span class="level-badge">${difficultyNames[g.difficulty]}</span><button class="play-label" data-open="${g.id}" ${locked?'disabled':''} aria-label="${g.title} — ${locked?'bloklangan':label}">${locked?'Bloklangan':label}<span class="round-play">${icon(locked?'lock':st==='completed'?'replay':'play')}</span></button></div></div></article>`;
+}
+function globalGames(){return games.filter(g=>globalCourse==='all'||g.course===globalCourse)}
+function recommendations(){return globalGames().filter(recommendedGame).sort((a,b)=>Number(b.recommended)-Number(a.recommended)||a.order-b.order)}
+function renderCourses(){ $('#courses').innerHTML=`<button class="course-chip ${globalCourse==='all'?'selected':''}" data-course="all" aria-pressed="${globalCourse==='all'}">${icon('grid')}Barcha yo‘nalishlar</button>`+courses.map(c=>`<button class="course-chip ${globalCourse===c.id?'selected':''}" data-course="${c.id}" aria-pressed="${globalCourse===c.id}"><img src="${ASSETS[c.asset]}" alt="">${c.name}</button>`).join(''); }
+function renderSections(){
+ const ongoing=globalGames().filter(g=>['in_progress','played'].includes(status(g))).sort((a,b)=>(sc(b).lastAt||0)-(sc(a).lastAt||0));
+ $('#continue-section').hidden=!ongoing.length;$('#continue-count').textContent=`${ongoing.length} ta o‘yin`;$('#continue-grid').innerHTML=ongoing.slice(0,2).map(g=>card(g,true)).join('');
+ $('#recommend-note').textContent=`Sening kurslaring bo‘yicha tanlandi: ${student.courses.map(c=>courseById[c].name).join(', ')}.`;const rec=recommendations();$('#recommend-section').hidden=!rec.length;$('#recommend-grid').innerHTML=rec.slice(0,4).map(g=>card(g)).join('');
+ renderCatalog();
+}
+function matching(){let result=globalGames().filter(g=>(filters.course==='all'||g.course===filters.course)&&(filters.status==='all'||(filters.status==='continue'?['in_progress','played'].includes(status(g)):status(g)===filters.status))&&(filters.difficulty==='all'||g.difficulty===filters.difficulty)&&(!filters.recommended||recommendedGame(g))&&g.title.toLocaleLowerCase().includes(query.toLocaleLowerCase().trim()));
+ result.sort(sort==='name'?(a,b)=>a.title.localeCompare(b.title,'uz'):sort==='newest'?(a,b)=>b.order-a.order:(a,b)=>Number(enrolled(b))-Number(enrolled(a))||Number(b.recommended)-Number(a.recommended)||a.order-b.order);return result;
+}
+function empty(title,description,action='clear',label='Filtrlarni tozalash',symbol='search'){return `<div class="empty-state">${icon(symbol)}<h3>${title}</h3><p>${description}</p><button class="secondary" data-action="${action}">${label}</button></div>`}
+function renderCatalog(){
+ const result=matching(),grid=$('#catalog-grid');grid.className=`game-grid ${view==='list'?'list-view':''}`;
+ $('#catalog-count').textContent=`${result.length} ta o‘yin`;$('#clear-search').hidden=!query;
+ const tags=[];if(filters.course!=='all')tags.push(['course',courseById[filters.course].name]);if(filters.status!=='all')tags.push(['status',statusLabel(filters.status)]);if(filters.difficulty!=='all')tags.push(['difficulty',difficultyNames[filters.difficulty]]);if(filters.recommended)tags.push(['recommended','Tavsiya etilgan']);
+ $('#filter-count').hidden=!tags.length;$('#filter-count').textContent=tags.length;$('#active-filters').innerHTML=tags.map(([id,label])=>`<button class="filter-tag" data-remove="${id}">${label}${icon('x')}</button>`).join('');
+ if(catalogState==='loading'){grid.setAttribute('aria-busy','true');grid.innerHTML=Array.from({length:4},()=>'<div class="skeleton-card" aria-label="O‘yin yuklanmoqda"><div></div><span></span><span></span><span></span></div>').join('');$('#catalog-bottom').innerHTML='';return;}
+ grid.removeAttribute('aria-busy');
+ if(catalogState==='error'){grid.innerHTML=empty('Hozircha ulana olmadik','O‘yinlarni yuklab bo‘lmadi. Internetni tekshirib, qayta urinib ko‘ring.','retry','Qayta urinish','alert');$('#catalog-bottom').innerHTML='';return;}
+ grid.innerHTML=result.length?result.slice(0,limit).map(g=>card(g)).join(''):empty('O‘yin topilmadi','Boshqa so‘z bilan qidirib ko‘ring yoki filtrlarni tozalang.');
+ $('#catalog-bottom').innerHTML=result.length?`${limit<result.length?`<button class="secondary load-more" data-action="more">Yana ${Math.min(8,result.length-limit)} ta o‘yinni ko‘rish ${icon('chevron')}</button>`:''}<p>${result.length} ta o‘yindan ${Math.min(limit,result.length)} tasi ko‘rsatilmoqda</p>`:'';
+}
+function toast(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').classList.add('visible');toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),3500)}
+let dialogReturn=null;
+function openDialog(title,body,foot='',drawer=false){const d=$('#dialog');if(!d.open)dialogReturn=document.activeElement;d.className=drawer?'drawer':'';$('#dialog-content').innerHTML=`<div class="dialog-head"><h2 id="dialog-title">${title}</h2><button class="icon-button" data-action="close" aria-label="Oynani yopish">${icon('x')}</button></div><div class="dialog-body">${body}</div>${foot?`<div class="dialog-foot">${foot}</div>`:''}`;if(!d.open)d.showModal();else{d.scrollTop=0;$('.dialog-head button',d).focus()} }
+function closeDialog(){$('#dialog').close();if(dialogReturn?.isConnected)dialogReturn.focus();else if(dialogReturn?.dataset.open){const replacement=$(`[data-open="${dialogReturn.dataset.open}"]`);(replacement||$('[data-action="home"]')).focus({preventScroll:true})}}
+function detail(id){const g=games.find(g=>g.id===id);if(!g||isLocked(g))return;const s=sc(g),st=status(g);
+ const next=g.kind==='level'?(g.levelIds.find(l=>!s.completed.includes(l))||g.levelIds[0]):null;
+ const levels=g.kind==='level'?`<div class="level-list" role="group" aria-label="Darajalar">${g.levelIds.map((l,i)=>{const d=s.completed.includes(l);return `<button class="level-row ${d?'done':''}" data-start="${g.id}" data-level="${l}"><span class="level-num">${d?icon('check'):i+1}</span><b>${i+1}-daraja</b><small>${d?'Bajarilgan':l===next?'Keyingi':''}</small></button>`}).join('')}</div>`:'';
+ const outcomeName={success:'Bajarildi',finished:'Tugatildi',aborted:'To‘xtatildi',failure:'Yutqazildi'};
+ const stats=s.attempts>0?`<div class="stat-grid"><div><b>${s.attempts}</b><span>urinish</span></div><div><b>${s.best?s.best.metrics.firstTryGroups+'/6':'—'}</b><span>eng yaxshi</span></div><div><b>${s.last?outcomeName[s.last.outcome]:'—'}</b><span>oxirgi natija</span></div></div>`:'';
+ const label=g.kind==='free'?(s.attempts?'Yana o‘ynash':'Boshlash'):st==='completed'?'Qayta o‘ynash':s.attempts>0?'Davom etish':'Boshlash';
+ openDialog(g.title,`<div class="dialog-cover">${artwork(g.art)}</div>${metaTags(g)}<div class="detail-meta"><span class="detail-pill">${difficultyNames[g.difficulty]}</span><span class="detail-pill">${g.kind==='level'?g.levelIds.length+' daraja':'Erkin o‘yin'}</span><span class="detail-pill">8–10 daqiqa</span></div><p>${g.description}</p><ol class="instructions"><li>Dars savoliga javob ber va qoidani eslab ol.</li><li>Mashqlarni yech: variant tanla, son yoz yoki mosla.</li><li>15 bosqichni yakunlab, natijangni ko‘r.</li></ol>${levels}${stats}<div id="pending-list" class="pending-list" data-game="${g.id}">${pendingHTML(g.id)}</div><p class="game-notice">Interaktiv namoyish: har bir daraja kursning bir xil 15 bosqichli namunaviy darsini ochadi. Eslatma: o‘yin to‘xtatilsa, keyingi safar boshidan boshlanadi. Natijalar faqat shu brauzerda saqlanadi.</p>`,`<button class="secondary" data-action="close">Orqaga</button><button class="primary" data-start="${g.id}"${next?` data-level="${next}"`:''}>${icon(st==='completed'?'replay':'play')}${label}</button>`);}
+function openFilters(){const optionGroup=(name,items)=>`<div class="filter-options">${items.map(([value,label])=>`<label class="choice"><input type="radio" name="${name}" value="${value}" ${filters[name]===value?'checked':''}><span>${label}</span></label>`).join('')}</div>`;openDialog('Filtrlar',`<p style="margin-bottom:22px">Bu filtrlar faqat “Barcha o‘yinlar” katalogiga ta’sir qiladi.${globalCourse!=='all'?` Hozirgi yo‘nalish: ${courseById[globalCourse].name}.`:''}</p><form id="filter-form"><fieldset class="filter-group"><legend>Kurs</legend><select class="filter-select" name="course" aria-label="Katalog kursi"><option value="all">Barcha kurslar</option>${courses.map(c=>`<option value="${c.id}" ${filters.course===c.id?'selected':''}>${c.name}</option>`).join('')}</select></fieldset><fieldset class="filter-group"><legend>O‘yin holati</legend>${optionGroup('status',[['all','Barchasi'],...Object.entries(statusNames)])}</fieldset><fieldset class="filter-group"><legend>Qiyinchilik darajasi</legend>${optionGroup('difficulty',[['all','Barchasi'],...Object.entries(difficultyNames)])}</fieldset><fieldset class="filter-group"><legend>Tavsiyalar</legend><label class="choice"><input type="checkbox" name="recommended" ${filters.recommended?'checked':''}><span>Faqat menga tavsiya etilganlar</span></label></fieldset></form>`,`<button class="secondary" data-action="clear-draft">Tozalash</button><button class="primary" data-action="apply-filters">Natijalarni ko‘rish ${icon('arrow')}</button>`,true)}
+function scrollCatalog(){$('#catalog').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'})}
+function clearFilters(){filters={course:'all',status:'all',difficulty:'all',recommended:false};query='';$('#search').value='';limit=8;catalogState='ready';renderCatalog()}
+function showPrototype(){openDialog('Prototip holatlari',`<p>Bu mustaqil HTML namoyish. 24 ta o‘yin, kurs filtrlari, o‘yin jarayonini sinab ko‘rish mumkin. Haqiqiy LMS yoki hisobga ulanmagan.</p><div class="prototype-options"><button class="secondary" data-action="demo-loading">${icon('clock')}Yuklanish holatini ko‘rish</button><button class="secondary" data-action="demo-error">${icon('alert')}Tarmoq xatosini ko‘rish</button><button class="secondary" data-action="demo-empty">${icon('search')}Qidiruvdagi bo‘sh holat</button><button class="secondary" data-action="save-ok">${icon('check')}Saqlash: normal</button><button class="secondary" data-action="save-offline">${icon('clock')}Saqlash: internet yo‘q (navbat)</button><button class="secondary" data-action="save-fail">${icon('alert')}Saqlash: server xatosi</button><button class="secondary" data-action="reset-confirm">${icon('replay')}Demo natijalarini tiklash</button></div>`)}
+const actions={
+ close:closeDialog,home:()=>{globalCourse='all';clearFilters();renderCourses();renderSections();window.scrollTo({top:0,behavior:'smooth'})},
+ 'see-continue':()=>{clearFilters();filters.status='continue';renderCatalog();scrollCatalog()},
+ 'see-recommended':()=>{clearFilters();filters.recommended=true;renderCatalog();scrollCatalog()},
+ filters:openFilters,'clear-draft':()=>{const f=$('#filter-form');f.elements.course.value='all';f.elements.status.value='all';f.elements.difficulty.value='all';f.elements.recommended.checked=false},
+ 'apply-filters':()=>{const f=$('#filter-form');filters={course:f.elements.course.value,status:f.elements.status.value,difficulty:f.elements.difficulty.value,recommended:f.elements.recommended.checked};limit=8;closeDialog();renderCatalog()},
+ clear:clearFilters,more:()=>{limit+=8;renderCatalog()},
+ retry:()=>{catalogState='loading';renderCatalog();clearTimeout(loadingTimer);loadingTimer=setTimeout(()=>{catalogState='ready';renderCatalog()},750)},
+ 'recommend-info':()=>openDialog('Aynan sen uchun',`<p>Bu yerda o‘zing o‘qiyotgan kurslarga mos, hali boshlamagan o‘yinlar ko‘rsatiladi. O‘yinni boshlasang, uni “Davom ettirish” bo‘limidan yoki katalogdan topasan.</p>`,`<button class="primary" data-action="close">Tushunarli</button>`),
+ notifications:()=>openDialog('Bildirishnomalar',`<div class="info-row"><span>${icon('gamepad')}</span><div><h3>Yangi o‘yinlar seni kutmoqda!</h3><p>Kurslaring bo‘yicha yangi sarguzashtlarni kashf et.</p></div></div><div class="info-row"><span>${icon('trophy')}</span><div><h3>O‘ynab bilimlaringni mustahkamla</h3><p>Barcha bosqichlarni yakunlab o‘z bilimingni sina.</p></div></div><p class="saved-note">Prototip uchun namunaviy bildirishnomalar.</p>`),
+ profile:()=>openDialog('Mening profilim',`<div class="profile-card"><span class="avatar">A</span><div><h3>Alisher</h3><p>6-sinf o‘quvchisi · Junior academy</p></div></div><p>O‘yinlardagi natijalaring shu brauzerda saqlanadi. Keyingi safar kelganingda davom ettirishing mumkin.</p><p class="game-notice">Namunaviy profil. Haqiqiy akkaunt ma’lumotlari ishlatilmagan.</p>`,`<button class="secondary" data-action="prototype">Prototip sozlamalari</button><button class="primary" data-action="close">Tushunarli</button>`),
+ achievements:()=>{const done=games.filter(g=>status(g)==='completed');openDialog('Mening yutuqlarim',`<p>${done.length} ta o‘yinni yakunlading. Har bir qadam — yangi bilim!</p>${done.map(g=>`<div class="info-row"><img src="${ASSETS.trophy}" alt=""><div><h3>${g.title}</h3><p>${g.levelIds.length||1} / ${g.levelIds.length||1} daraja · Bajarilgan</p></div></div>`).join('')||'<p class="game-notice">Birinchi o‘yiningni yakunlab, ilk yutug‘ingni qo‘lga kirit!</p>'}<p class="saved-note">Faqat ushbu prototipdagi natijalar.</p>`)},
+ schedule:()=>openDialog('Dars jadvali',`<p>Junior platformasi navigatsiyasining namunaviy ko‘rinishi.</p><div class="info-row"><span>${icon('calendar')}</span><div><h3>Matematika</h3><p>Dushanba va chorshanba · 15:00–16:00</p></div></div><div class="info-row"><span>${icon('calendar')}</span><div><h3>Dasturlash</h3><p>Seshanba va payshanba · 16:00–17:00</p></div></div><p class="game-notice">Bu jadval namuna. Haqiqiy dars jadvali LMS integratsiyasida olinadi.</p>`,`<button class="primary" data-action="close">GameLab’ga qaytish</button>`),
+ menu:()=>openDialog('Junior academy',`<div class="prototype-options"><button class="secondary" data-action="schedule">${icon('calendar')}Dars jadvali</button><button class="secondary" data-action="achievements">${icon('trophy')}Mening yutuqlarim</button><button class="primary" data-action="close">${icon('gamepad')}GameLab</button></div>`),
+ prototype:showPrototype,'demo-loading':()=>{closeDialog();catalogState='loading';renderCatalog();scrollCatalog();clearTimeout(loadingTimer);loadingTimer=setTimeout(()=>{catalogState='ready';renderCatalog()},2400)},
+ 'demo-error':()=>{clearTimeout(loadingTimer);closeDialog();catalogState='error';renderCatalog();scrollCatalog()},
+ 'demo-empty':()=>{clearTimeout(loadingTimer);closeDialog();catalogState='ready';query='Kosmik ajdarho';$('#search').value=query;renderCatalog();scrollCatalog()},
+ 'reset-confirm':()=>openDialog('Demo natijalarini tiklash',`<p>Ushbu brauzerdagi GameLab demo progressi boshlang‘ich holatga qaytadi.</p>`,`<button class="secondary" data-action="profile">Bekor qilish</button><button class="primary" data-action="reset">Tiklash</button>`),
+ 'save-ok':()=>{closeDialog();setSaveMode('ok')},'save-offline':()=>{closeDialog();setSaveMode('offline')},'save-fail':()=>{closeDialog();setSaveMode('fail')},
+ reset:()=>{saved=initial();hostReset();save();closeDialog();globalCourse='all';clearFilters();renderCourses();renderSections();toast('Demo boshlang‘ich holatga qaytarildi.')}
+};
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;if(b.dataset.course){globalCourse=b.dataset.course;limit=8;renderCourses();renderSections();const selected=$(`[data-course="${globalCourse}"]`);selected.focus({preventScroll:true});selected.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'});return}if(b.dataset.open){detail(b.dataset.open);return}if(b.dataset.start){closeDialog();startGame(b.dataset.start,b.dataset.level);return}if(b.dataset.retry){hostRetry(b.dataset.retry);return}if(b.dataset.view){view=b.dataset.view;$$('[data-view]').forEach(x=>{x.classList.toggle('selected',x.dataset.view===view);x.setAttribute('aria-pressed',String(x.dataset.view===view))});renderCatalog();return}if(b.dataset.remove){filters[b.dataset.remove]=b.dataset.remove==='recommended'?false:'all';limit=8;renderCatalog();return}if(b.dataset.action)actions[b.dataset.action]?.()});
+$('#search').addEventListener('input',e=>{query=e.target.value;limit=8;renderCatalog()});
+$('#clear-search').addEventListener('click',()=>{query='';$('#search').value='';limit=8;renderCatalog();$('#search').focus()});
+$('#sort').addEventListener('change',e=>{sort=e.target.value;renderCatalog()});
+$('#dialog').addEventListener('cancel',e=>{e.preventDefault();closeDialog()});
+$('#dialog').addEventListener('click',e=>{if(e.target===$('#dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog()}});
