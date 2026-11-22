@@ -7,6 +7,11 @@ const assetMap={robot:'3D/robot_gamer.png',robotWave:'3D/robot_wave.png',trophy:
 const assets=Object.fromEntries(Object.entries(assetMap).map(([name,file])=>[name,'data:image/png;base64,'+fs.readFileSync(path.join(source,file)).toString('base64')]));
 // A small robot course symbol uses the supplied robot art rather than duplicating the digital icon.
 assets.robotIcon=assets.robotWave;
+// Embed game-specific covers so the standalone HTML still works offline.
+assets.blockPuzzleBanner='data:image/png;base64,'+fs.readFileSync(path.join(dir,'BlockPuzzle-banner.png')).toString('base64');
+assets.blockPuzzleCompact='data:image/png;base64,'+fs.readFileSync(path.join(dir,'BlockPuzzle-compact.png')).toString('base64');
+assets.bridgeConstructorBanner='data:image/png;base64,'+fs.readFileSync(path.join(dir,'BridgeConstructor-banner.png')).toString('base64');
+assets.bridgeConstructorCompact='data:image/png;base64,'+fs.readFileSync(path.join(dir,'BridgeConstructor-compact.png')).toString('base64');
 const font=fs.readFileSync(path.join(dir,'nunito.woff2'));
 const fontIsTrueType=font.subarray(0,4).equals(Buffer.from([0,1,0,0]));
 const read=name=>fs.readFileSync(path.join(dir,name),'utf8');

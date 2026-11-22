@@ -81,3 +81,12 @@ dialog{padding:0;border:1px solid #e3e5ed;border-radius:24px;width:min(580px,cal
 .continue-card>.play-btn{align-self:center}
 @media(max-width:640px){.continue-card{flex-wrap:wrap}.continue-card>.play-btn{flex:1 0 100%;margin-bottom:4px}}
 @media(max-width:340px){.card-bottom .play-btn{padding:0 10px;font-size:13px;gap:6px}}
+
+/* Block Puzzle: wide recommendation cover and uncropped compact board. */
+.blockpuzzle-banner{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.blockpuzzle-banner.is-compact{object-fit:contain;background:linear-gradient(135deg,#d6f6ff,#e6e2ff 65%,#ffe8dd)}
+
+/* Bridge Constructor: preserve both bridge ends in compact cards. */
+.bridgeconstructor-banner{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.bridgeconstructor-banner.is-compact{object-fit:contain;background:linear-gradient(135deg,#d5e6df,#93ac77)}
+

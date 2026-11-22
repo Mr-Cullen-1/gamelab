@@ -73,7 +73,7 @@ const games=gameData.map(([id,title,course,art,description,difficulty,done,recom
 const showcaseGames=[
  ['blockpuzzle','Blok Puzzle','math','blockpuzzle','8×8 maydonga shakllarni joyla va qatorlarni tozala!','medium',[3,6],2],
  ['mathfishing','Matematik baliqchi','math','fish','Misolni yech va javobi yozilgan baliqni tut!','easy',[2,4],1],
- ['bridgeconstructor','Ko‘prik ustasi','math','bridge','Materialni tejab ko‘prik qur va mashinani narigi qirg‘oqqa o‘tkaz.','hard',[6,9],0]
+ ['bridgeconstructor','Ko‘prik ustasi','math','bridgeconstructor','Materialni tejab ko‘prik qur va mashinani narigi qirg‘oqqa o‘tkaz.','hard',[6,9],0]
 ].map(([id,title,course,art,description,difficulty,grades,done],index)=>({id,title,course,courseIds:[course],grades,art,description,difficulty,recommended:true,requires:null,order:index,kind:'level',levelIds:['l1','l2','l3'],done,showcase:true}));
 const CONTINUE_IDS=['blockpuzzle','mathfishing'];
 const showcaseById=Object.fromEntries(showcaseGames.map(g=>[g.id,g]));
@@ -105,6 +105,7 @@ function progressBlock(g){const s=sc(g);
  return `<div class="rekord-row">${icon('trophy')}<span>${s.best?`Rekord: <b>${s.best.metrics.firstTryGroups}/6</b>`:'Rekord yo‘q'}</span><span>${s.attempts} marta</span></div>`}
 let artNumber=0;
 function artwork(type,compact=false){
+ if(type==='bridgeconstructor')return `<img class="bridgeconstructor-banner${compact?' is-compact':''}" src="${compact?ASSETS.bridgeConstructorCompact:ASSETS.bridgeConstructorBanner}" alt="Ko‘prik ustasi — daryo ustidagi uchburchak tayanchli ko‘prik va sariq avtomobil" width="${compact?800:1600}" height="${compact?800:870}">`;
  if(type==='blockpuzzle')return `<img class="blockpuzzle-banner${compact?' is-compact':''}" src="${compact?ASSETS.blockPuzzleCompact:ASSETS.blockPuzzleBanner}" alt="Block Puzzle — to‘q ko‘k 8×8 maydondagi rangli bloklar" width="${compact?800:1600}" height="${compact?800:870}">`;
  const uid=`a${artNumber++}`;
  const themes={blocks:['#382075','#9160ed'],geometry:['#41319f','#a18aff'],bridge:['#48b3ef','#b2edff'],rocket:['#181845','#6552c5'],laptop:['#5e2baf','#bf83ff'],robot:['#7654d9','#cbb5ff'],words:['#df4c99','#ffc0d7'],maze:['#006979','#62d8c5'],fish:['#0a6fb8','#59d4e8'],shield:['#246db8','#97c8ff']};
