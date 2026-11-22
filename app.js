@@ -72,7 +72,7 @@ const games=gameData.map(([id,title,course,art,description,difficulty,done,recom
 // `done` = fixed demo progress on the "Davom ettirish" cards (0–3 levels).
 const showcaseGames=[
  ['blockpuzzle','Blok Puzzle','math','blockpuzzle','8×8 maydonga shakllarni joyla va qatorlarni tozala!','medium',[3,6],2],
- ['mathfishing','Matematik baliqchi','math','fish','Misolni yech va javobi yozilgan baliqni tut!','easy',[2,4],1],
+ ['mathfishing','Matematik baliqchi','math','mathfishing','Misolni yech va javobi yozilgan baliqni tut!','easy',[2,4],1],
  ['bridgeconstructor','Ko‘prik ustasi','math','bridgeconstructor','Materialni tejab ko‘prik qur va mashinani narigi qirg‘oqqa o‘tkaz.','hard',[6,9],0]
 ].map(([id,title,course,art,description,difficulty,grades,done],index)=>({id,title,course,courseIds:[course],grades,art,description,difficulty,recommended:true,requires:null,order:index,kind:'level',levelIds:['l1','l2','l3'],done,showcase:true}));
 const CONTINUE_IDS=['blockpuzzle','mathfishing'];
@@ -105,6 +105,7 @@ function progressBlock(g){const s=sc(g);
  return `<div class="rekord-row">${icon('trophy')}<span>${s.best?`Rekord: <b>${s.best.metrics.firstTryGroups}/6</b>`:'Rekord yo‘q'}</span><span>${s.attempts} marta</span></div>`}
 let artNumber=0;
 function artwork(type,compact=false){
+ if(type==='mathfishing')return `<img class="mathfishing-banner${compact?' is-compact':''}" src="${compact?ASSETS.mathFishingCompact:ASSETS.mathFishingBanner}" alt="Math Fishing — robot-baliqchi 7 + 5 misolining javobi 12 yozilgan baliqni tutmoqda" width="${compact?800:1600}" height="${compact?800:870}">`;
  if(type==='bridgeconstructor')return `<img class="bridgeconstructor-banner${compact?' is-compact':''}" src="${compact?ASSETS.bridgeConstructorCompact:ASSETS.bridgeConstructorBanner}" alt="Ko‘prik ustasi — daryo ustidagi uchburchak tayanchli ko‘prik va sariq avtomobil" width="${compact?800:1600}" height="${compact?800:870}">`;
  if(type==='blockpuzzle')return `<img class="blockpuzzle-banner${compact?' is-compact':''}" src="${compact?ASSETS.blockPuzzleCompact:ASSETS.blockPuzzleBanner}" alt="Block Puzzle — to‘q ko‘k 8×8 maydondagi rangli bloklar" width="${compact?800:1600}" height="${compact?800:870}">`;
  const uid=`a${artNumber++}`;
