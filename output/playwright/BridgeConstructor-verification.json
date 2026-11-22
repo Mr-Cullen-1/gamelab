@@ -1,0 +1,71 @@
+{
+  "checks": [
+    {
+      "width": 320,
+      "overflow": false,
+      "loaded": true,
+      "inline": true,
+      "box": [
+        242,
+        132
+      ],
+      "blockPuzzleIntact": true,
+      "continueUnchanged": true
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "loaded": true,
+      "inline": true,
+      "box": [
+        286,
+        156
+      ],
+      "blockPuzzleIntact": true,
+      "continueUnchanged": true
+    },
+    {
+      "width": 820,
+      "overflow": false,
+      "loaded": true,
+      "inline": true,
+      "box": [
+        355,
+        178
+      ],
+      "blockPuzzleIntact": true,
+      "continueUnchanged": true
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "loaded": true,
+      "inline": true,
+      "box": [
+        305,
+        166
+      ],
+      "blockPuzzleIntact": true,
+      "continueUnchanged": true
+    },
+    {
+      "width": 1920,
+      "overflow": false,
+      "loaded": true,
+      "inline": true,
+      "box": [
+        305,
+        162
+      ],
+      "blockPuzzleIntact": true,
+      "continueUnchanged": true
+    }
+  ],
+  "compactPreviewWidths": [
+    320,
+    390,
+    1440
+  ],
+  "errors": [],
+  "offline": true
+}

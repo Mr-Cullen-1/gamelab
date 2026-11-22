@@ -1,0 +1,338 @@
+[
+  {
+    "id": "blocks",
+    "file": "BlokPazl-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 183234
+  },
+  {
+    "id": "blocks",
+    "file": "BlokPazl-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 98836
+  },
+  {
+    "id": "race",
+    "file": "SonlarPoygasi-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 246888
+  },
+  {
+    "id": "race",
+    "file": "SonlarPoygasi-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 142822
+  },
+  {
+    "id": "geometry",
+    "file": "GeometriyaSiti-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 221298
+  },
+  {
+    "id": "geometry",
+    "file": "GeometriyaSiti-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 127908
+  },
+  {
+    "id": "bridge",
+    "file": "MatematikYol-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 232440
+  },
+  {
+    "id": "bridge",
+    "file": "MatematikYol-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 130262
+  },
+  {
+    "id": "code-world",
+    "file": "KodlabKor-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 191528
+  },
+  {
+    "id": "code-world",
+    "file": "KodlabKor-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 105600
+  },
+  {
+    "id": "robot",
+    "file": "RobotniBoshqar-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 201274
+  },
+  {
+    "id": "robot",
+    "file": "RobotniBoshqar-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 115292
+  },
+  {
+    "id": "words",
+    "file": "SozlarSayyorasi-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 266116
+  },
+  {
+    "id": "words",
+    "file": "SozlarSayyorasi-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 140918
+  },
+  {
+    "id": "puzzle",
+    "file": "MantiqLabirinti-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 172302
+  },
+  {
+    "id": "puzzle",
+    "file": "MantiqLabirinti-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 88140
+  },
+  {
+    "id": "safe",
+    "file": "InternetQahramoni-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 211404
+  },
+  {
+    "id": "safe",
+    "file": "InternetQahramoni-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 122888
+  },
+  {
+    "id": "fractions",
+    "file": "KasrlarOshxonasi-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 252152
+  },
+  {
+    "id": "fractions",
+    "file": "KasrlarOshxonasi-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 145920
+  },
+  {
+    "id": "english-quest",
+    "file": "SozOvchisi-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 281582
+  },
+  {
+    "id": "english-quest",
+    "file": "SozOvchisi-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 174134
+  },
+  {
+    "id": "algorithm",
+    "file": "AlgoritmUstasi-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 234902
+  },
+  {
+    "id": "algorithm",
+    "file": "AlgoritmUstasi-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 124998
+  },
+  {
+    "id": "memory",
+    "file": "XotiraKartalari-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 178218
+  },
+  {
+    "id": "memory",
+    "file": "XotiraKartalari-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 98868
+  },
+  {
+    "id": "sensor",
+    "file": "SensorlarOlami-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 235724
+  },
+  {
+    "id": "sensor",
+    "file": "SensorlarOlami-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 145828
+  },
+  {
+    "id": "keyboard",
+    "file": "KlaviaturaUstasi-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 194684
+  },
+  {
+    "id": "keyboard",
+    "file": "KlaviaturaUstasi-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 105874
+  },
+  {
+    "id": "colors",
+    "file": "RanglarOlami-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 231890
+  },
+  {
+    "id": "colors",
+    "file": "RanglarOlami-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 141230
+  },
+  {
+    "id": "space",
+    "file": "KosmikHisob-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 244860
+  },
+  {
+    "id": "space",
+    "file": "KosmikHisob-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 136028
+  },
+  {
+    "id": "logic-bridge",
+    "file": "AqlKoprigi-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 217502
+  },
+  {
+    "id": "logic-bridge",
+    "file": "AqlKoprigi-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 123684
+  },
+  {
+    "id": "loops",
+    "file": "TakrorlashSehri-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 233348
+  },
+  {
+    "id": "loops",
+    "file": "TakrorlashSehri-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 123796
+  },
+  {
+    "id": "robot-build",
+    "file": "RobotKonstruktor-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 191188
+  },
+  {
+    "id": "robot-build",
+    "file": "RobotKonstruktor-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 103130
+  },
+  {
+    "id": "files",
+    "file": "FayllarShahri-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 261110
+  },
+  {
+    "id": "files",
+    "file": "FayllarShahri-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 147096
+  },
+  {
+    "id": "sentence",
+    "file": "GapTuzuvchi-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 204754
+  },
+  {
+    "id": "sentence",
+    "file": "GapTuzuvchi-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 114196
+  },
+  {
+    "id": "patterns",
+    "file": "NaqshlarSiri-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 125660
+  },
+  {
+    "id": "patterns",
+    "file": "NaqshlarSiri-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 59056
+  },
+  {
+    "id": "robot-route",
+    "file": "RobotSayohati-banner",
+    "width": 1600,
+    "height": 870,
+    "webpBytes": 249514
+  },
+  {
+    "id": "robot-route",
+    "file": "RobotSayohati-compact",
+    "width": 800,
+    "height": 800,
+    "webpBytes": 154404
+  }
+]

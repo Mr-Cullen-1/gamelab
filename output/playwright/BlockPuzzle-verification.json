@@ -1,0 +1,166 @@
+{
+  "checks": [
+    {
+      "width": 320,
+      "overflow": false,
+      "banners": [
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            800,
+            800
+          ],
+          "fit": "contain",
+          "box": [
+            60,
+            75
+          ]
+        },
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            1600,
+            870
+          ],
+          "fit": "cover",
+          "box": [
+            242,
+            132
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "banners": [
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            800,
+            800
+          ],
+          "fit": "contain",
+          "box": [
+            91,
+            75
+          ]
+        },
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            1600,
+            870
+          ],
+          "fit": "cover",
+          "box": [
+            286,
+            156
+          ]
+        }
+      ]
+    },
+    {
+      "width": 820,
+      "overflow": false,
+      "banners": [
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            800,
+            800
+          ],
+          "fit": "contain",
+          "box": [
+            95,
+            80
+          ]
+        },
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            1600,
+            870
+          ],
+          "fit": "cover",
+          "box": [
+            355,
+            178
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "banners": [
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            800,
+            800
+          ],
+          "fit": "contain",
+          "box": [
+            139,
+            82
+          ]
+        },
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            1600,
+            870
+          ],
+          "fit": "cover",
+          "box": [
+            305,
+            166
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "overflow": false,
+      "banners": [
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            800,
+            800
+          ],
+          "fit": "contain",
+          "box": [
+            139,
+            82
+          ]
+        },
+        {
+          "loaded": true,
+          "inline": true,
+          "natural": [
+            1600,
+            870
+          ],
+          "fit": "cover",
+          "box": [
+            305,
+            162
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "offline": true
+}

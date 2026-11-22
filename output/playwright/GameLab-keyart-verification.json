@@ -1,0 +1,184 @@
+{
+  "checks": [
+    {
+      "width": 320,
+      "overflow": false,
+      "recommend": [
+        {
+          "id": "blockpuzzle",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839135083759059
+        },
+        {
+          "id": "mathfishing",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839135083759059
+        },
+        {
+          "id": "bridgeconstructor",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839135083759059
+        }
+      ],
+      "compact": [
+        {
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "catalog": 8
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "recommend": [
+        {
+          "id": "blockpuzzle",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.8390850722311396
+        },
+        {
+          "id": "mathfishing",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.8390850722311396
+        },
+        {
+          "id": "bridgeconstructor",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.8390850722311396
+        }
+      ],
+      "compact": [
+        {
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "catalog": 8
+    },
+    {
+      "width": 820,
+      "overflow": false,
+      "recommend": [
+        {
+          "id": "blockpuzzle",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839080459770115
+        },
+        {
+          "id": "mathfishing",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839080459770115
+        },
+        {
+          "id": "bridgeconstructor",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839080459770115
+        }
+      ],
+      "compact": [
+        {
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "catalog": 8
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "recommend": [
+        {
+          "id": "blockpuzzle",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839184597961495
+        },
+        {
+          "id": "mathfishing",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839184597961495
+        },
+        {
+          "id": "bridgeconstructor",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839184597961495
+        }
+      ],
+      "compact": [
+        {
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "catalog": 8
+    },
+    {
+      "width": 1920,
+      "overflow": false,
+      "recommend": [
+        {
+          "id": "blockpuzzle",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839184597961495
+        },
+        {
+          "id": "mathfishing",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839184597961495
+        },
+        {
+          "id": "bridgeconstructor",
+          "loaded": true,
+          "inline": true,
+          "ratio": 1.839184597961495
+        }
+      ],
+      "compact": [
+        {
+          "loaded": true,
+          "fit": "contain"
+        },
+        {
+          "loaded": true,
+          "fit": "contain"
+        }
+      ],
+      "catalog": 8
+    }
+  ],
+  "courseFilterPassed": true,
+  "bridgeCompactPassed": true,
+  "errors": [],
+  "requests": [],
+  "offline": true
+}
