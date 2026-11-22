@@ -34,7 +34,7 @@ Dizayn manbasi: Figma "B · O‘yin" (3D tugmalar, segmentli progress, natija pa
 |---|---|
 | `:root{--brand` | Barcha dizayn tokenlari |
 | `const GRADES`, `gradeText()` | Har bir o‘yin uchun tavsiya etilgan sinflar `[dan, gacha]` (namunaviy qiymatlar) va kartadagi yorliq matni |
-| `const gameData`, `const games` | 24 ta o‘yin metadatasi (kurs, qiyinlik, tavsiya bayrog‘i, `requires`, `kind`, `levelIds`) |
+| `const gameData`, `const games` | 27 ta o‘yin metadatasi: 24 ta katalog o‘yini + 3 ta vitrina kartasi (Block Puzzle, Math Fishing, Bridge Master; faqat ko‘rinish, `showcase: true`). Maydonlar: kurs, qiyinlik, tavsiya bayrog‘i, `requires`, `kind`, `levelIds` |
 | `function status(` | Karta holatini hisoblash (5 ta holat) |
 | `function recommendedGame` | Kurslar bo‘yicha tavsiya qoidasi |
 | `LESSON CONTENT (demo)` | Namunaviy o‘yin ekranlarining mazmuni (6 kurs × 15 ekran) |
@@ -255,7 +255,7 @@ Ishlab chiqarishda qo‘shish kerak:
 | Mascot (robot) | **Vaqtinchalik** (dizayn paketidagi PNG). Platformadagi rasmiy mascot bilan almashtiring. |
 | Kurs ikonkalari | Dizayn paketidan (PNG). Platformadagi rasmiy ikonkalar bilan almashtiring. |
 | Kubok | Dizayn paketidan (PNG). |
-| O‘yin cover'lari | HTML ichidagi SVG (`artwork()`); ishlab chiqarishda `game_<slug>_cover.webp` (2x). |
+| O‘yin cover'lari | Har bir o‘yinning o‘z tasviri: keng **1600×870** va kvadrat **800×800** (PNG manba + WebP). HTML'ga `catalog-banner-manifest.json` orqali base64 qilib joylanadi (`ASSETS.catalogCovers`, `gameArtwork()`); manba va galereya: `GameLab-catalog-banners.md`. Ishlab chiqarishda `game_<slug>_cover.webp` sifatida platforma CDN'iga qo‘yiladi. Eski SVG `artwork()` faqat tasviri yo‘q o‘yinlar uchun zaxira. |
 | O‘yin oynasi ikonkalari | Inline SVG, `stroke` uslubi (`iconPaths`). Platformaning ikonka to‘plami bo‘lsa, shuni ishlating. |
 | Dars sahnalari (Quyosh–Yer, harflar, qalqon, kod) | Inline SVG (`LESSON_ART`). |
 | Shrift | Aeonik (HTML'da yo‘q). Zaxira Nunito (SIL OFL) HTML ichida. |
