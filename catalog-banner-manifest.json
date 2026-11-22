@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "style": "GameLab premium 3D game key art",
+  "wideSize": [
+    1600,
+    870
+  ],
+  "compactSize": [
+    800,
+    800
+  ],
+  "games": [
+    {
+      "id": "blocks",
+      "title": "Blok pazl",
+      "file": "BlokPazl",
+      "logo": "BLOK|PAZL",
+      "palette": "violet, mint and amber",
+      "scene": "A dark navy 8 by 8 rounded square board, chunky violet L tetromino being fitted into an obvious matching gap, mint and amber placed tiles, a single row lights up. Different playful arrangement from Block Puzzle, full readable board."
+    },
+    {
+      "id": "race",
+      "title": "Sonlar poygasi",
+      "file": "SonlarPoygasi",
+      "logo": "SONLAR|POYGASI",
+      "palette": "electric blue, orange and gold",
+      "scene": "A cheerful streamlined toy rocket racing along a curving luminous space track through three big floating number gates marked 12, 24, 36 in that exact order. One big rocket in foreground, a golden finish star, deep space, mathematical racing energy."
+    },
+    {
+      "id": "geometry",
+      "title": "Geometriya Siti",
+      "file": "GeometriyaSiti",
+      "logo": "GEOMETRIYA|SITI",
+      "palette": "violet, sky blue and golden yellow",
+      "scene": "A fantastical friendly miniature city assembled entirely from recognizable geometry: a large golden cube building, a purple pyramid roof, cylindrical blue towers and a sphere. Foreground glossy triangle, circle and square hover as construction pieces. Strong central geometric city skyline."
+    },
+    {
+      "id": "bridge",
+      "title": "Matematik yo‘l",
+      "file": "MatematikYol",
+      "logo": "MATEMATIK|YO‘L",
+      "palette": "sky blue, warm coral and jade",
+      "scene": "A winding path of large numbered stepping tiles connecting two grassy floating islands. A cheerful small orange rover is about to cross tiles 2, 4, 6 toward a golden destination flag. One highlighted missing tile slots into the route. Clearly arithmetic path game, not timber bridge engineering."
+    },
+    {
+      "id": "code-world",
+      "title": "Kodlab ko‘r",
+      "file": "KodlabKor",
+      "logo": "KODLAB|KO‘R",
+      "palette": "indigo, cyan and orange",
+      "scene": "A large open glossy purple laptop with a clean bright cyan screen displaying just a bold white </> coding symbol. A small friendly cream and orange robot beside it joyfully connects colorful code blocks. Crisp game-like coding world, three large code tiles, no tiny code text."
+    },
+    {
+      "id": "robot",
+      "title": "Robotni boshqar",
+      "file": "RobotniBoshqar",
+      "logo": "ROBOTNI|BOSHQAR",
+      "palette": "teal, orange and warm ivory",
+      "scene": "Friendly compact cream robot with orange face rim and black screen mint eyes walking on a small isometric tiled maze toward a glowing flag. Three big command tiles with simple forward arrow, right turn arrow, forward arrow clearly show programming movement. Robot in foreground, board behind."
+    },
+    {
+      "id": "words",
+      "title": "So‘zlar sayyorasi",
+      "file": "SozlarSayyorasi",
+      "logo": "SO‘ZLAR|SAYYORASI",
+      "palette": "pink, violet and turquoise",
+      "scene": "A tiny friendly spherical word planet covered in alphabet toy blocks. Large readable A B C letter cubes orbit around a small rocket shaped pencil, a central bright red apple with the simple word APPLE on a cream card. Cheerful vocabulary space exploration, few large objects."
+    },
+    {
+      "id": "puzzle",
+      "title": "Mantiq labirinti",
+      "file": "MantiqLabirinti",
+      "logo": "MANTIQ|LABIRINTI",
+      "palette": "deep teal, mint and gold",
+      "scene": "A prominent isometric square labyrinth with thick turquoise walls on dark teal base. One glossy orange ball follows a glowing clean route toward a large golden star at exit. Full maze corners visible. Clear route decision, a single hero ball and star, avoid busy microdetails."
+    },
+    {
+      "id": "safe",
+      "title": "Internet qahramoni",
+      "file": "InternetQahramoni",
+      "logo": "INTERNET|QAHRAMONI",
+      "palette": "cobalt, cyan and amber",
+      "scene": "A friendly cream orange robot guarding a luminous blue shield with a large white checkmark in front of a laptop. A closed padlock and three small stylized harmless red warning shapes kept outside shield. Heroic safe internet protection, optimistic, no scary hacker."
+    },
+    {
+      "id": "fractions",
+      "title": "Kasrlar oshxonasi",
+      "file": "KasrlarOshxonasi",
+      "logo": "KASRLAR|OSHXONASI",
+      "palette": "orange, cream and teal",
+      "scene": "A colorful toy kitchen fraction puzzle: a large pizza divided cleanly into four equal quarters on a round board, one quarter held just above its empty space by a cartoon spatula. Two large cream fraction tiles read 1/4 and 3/4. A sliced orange and rolling pin secondary, clear mathematical parts-of-whole."
+    },
+    {
+      "id": "english-quest",
+      "title": "So‘z ovchisi",
+      "file": "SozOvchisi",
+      "logo": "SO‘Z|OVCHISI",
+      "palette": "emerald, orange and sky blue",
+      "scene": "A large magnifying glass reveals a friendly red apple picture and the word APPLE on a letter-card treasure board. Big scattered A P P L E tiles form the correct word, a toy compass and bright little dictionary support a vocabulary treasure-hunt theme. No weapons."
+    },
+    {
+      "id": "algorithm",
+      "title": "Algoritm ustasi",
+      "file": "AlgoritmUstasi",
+      "logo": "ALGORITM|USTASI",
+      "palette": "indigo, electric cyan and amber",
+      "scene": "Three prominent chunky command tiles numbered 1, 2, 3 connected by luminous arrows form a clear path from a small orange robot to a golden target. A floating ordered step staircase and a code puzzle platform show sequence logic; simple coherent algorithm, no complex flowchart."
+    },
+    {
+      "id": "memory",
+      "title": "Xotira kartalari",
+      "file": "XotiraKartalari",
+      "logo": "XOTIRA|KARTALARI",
+      "palette": "violet, pink and mint",
+      "scene": "A playful fan of thick glossy memory cards on a game table. Two face-up cards show identical orange star icons, a second matching pair shows identical mint apples; two cards are face down with simple violet patterns. One card flips with a curved trail, instantly obvious matching-pairs game."
+    },
+    {
+      "id": "sensor",
+      "title": "Sensorlar olami",
+      "file": "SensorlarOlami",
+      "logo": "SENSORLAR|OLAMI",
+      "palette": "teal, lime and orange",
+      "scene": "A friendly small cream robot with orange face rim and two large expressive sensor eyes scans a nearby orange obstacle. Three clean translucent scanning arcs, one prominent toy distance sensor module with two round lenses, a small glowing light sensor. Educational sensing playground, no complex circuit text."
+    },
+    {
+      "id": "keyboard",
+      "title": "Klaviatura ustasi",
+      "file": "KlaviaturaUstasi",
+      "logo": "KLAVIATURA|USTASI",
+      "palette": "cobalt, violet and coral",
+      "scene": "A dramatic close-up toy mechanical keyboard with chunky bright keys, recognizable A S D F letters and a large ENTER key with return arrow. One orange key is pressed and glows; colorful curved typing trails lead to a small screen with one clean checkmark. No hands needed, focus keyboard mastery."
+    },
+    {
+      "id": "colors",
+      "title": "Ranglar olami",
+      "file": "RanglarOlami",
+      "logo": "RANGLAR|OLAMI",
+      "palette": "rainbow with deep blue contrast",
+      "scene": "Three glossy friendly paint splashes shaped like game blobs in pure red, blue and yellow, with matching chunky paint tubs clearly labeled RED, BLUE, YELLOW. A large rainbow paintbrush creates a clean color arc, violet backdrop, playful English colors learning, very clear palette."
+    },
+    {
+      "id": "space",
+      "title": "Kosmik hisob",
+      "file": "KosmikHisob",
+      "logo": "KOSMIK|HISOB",
+      "palette": "navy, violet and warm gold",
+      "scene": "A large friendly orange-and-white explorer rocket passing a ringed purple planet. Three floating chunky number asteroids form the correct equation 6 x 7 = 42 on simple separate stone tiles. Glowing destination star, space calculation adventure, different from number racing track."
+    },
+    {
+      "id": "logic-bridge",
+      "title": "Aql ko‘prigi",
+      "file": "AqlKoprigi",
+      "logo": "AQL|KO‘PRIGI",
+      "palette": "emerald, cyan and amber",
+      "scene": "A magical logic bridge made of thick interlocking geometric puzzle slabs crosses a turquoise chasm between green islands. One missing orange jigsaw-shaped segment is hovering into its matching slot, gold destination star on far side. Clear puzzle-solving cause and effect; no car or timber truss."
+    },
+    {
+      "id": "loops",
+      "title": "Takrorlash sehri",
+      "file": "TakrorlashSehri",
+      "logo": "TAKRORLASH|SEHRI",
+      "palette": "violet, hot pink and cyan",
+      "scene": "A tiny cream orange coding robot rides a circular sequence of three bright repeated command tiles connected in a glowing loop arrow. Three identical star pickups show repetition. One large looping arrow encircles the scene with a small x3 badge; code loop magic, no wizard or invented combat."
+    },
+    {
+      "id": "robot-build",
+      "title": "Robot konstruktor",
+      "file": "RobotKonstruktor",
+      "logo": "ROBOT|KONSTRUKTOR",
+      "palette": "orange, cyan and deep navy",
+      "scene": "An adorable cream robot with orange visor rim being assembled in an inviting toy workshop: completed torso and head centered, one arm and two wheels floating in a tidy exploded assembly alignment, large wrench to side. Parts visibly fit, no random mechanical junk, happy mint eyes."
+    },
+    {
+      "id": "files",
+      "title": "Fayllar shahri",
+      "file": "FayllarShahri",
+      "logo": "FAYLLAR|SHAHRI",
+      "palette": "sky blue, mint and golden orange",
+      "scene": "A miniature city built from three oversized colorful file folders and document towers. A large golden folder receives three floating files with simple picture, musical-note and text-line icons. A friendly orange delivery cursor arrow guides a file into matching folder, clear digital organization concept."
+    },
+    {
+      "id": "sentence",
+      "title": "Gap tuzuvchi",
+      "file": "GapTuzuvchi",
+      "logo": "GAP|TUZUVCHI",
+      "palette": "pink, cyan and warm yellow",
+      "scene": "Three large chunky English word tiles snap together left to right to read exactly I LOVE APPLES. Behind them a cheerful red apple and a little open illustrated book. One word tile is being slotted into a rounded sentence rail with a subtle success glow. Simple obvious sentence building."
+    },
+    {
+      "id": "patterns",
+      "title": "Naqshlar siri",
+      "file": "NaqshlarSiri",
+      "logo": "NAQSHLAR|SIRI",
+      "palette": "deep violet, coral and mint",
+      "scene": "A clear playful sequence of chunky 3D shapes: coral circle, mint triangle, coral circle, mint triangle, empty outlined circle slot. A matching coral circle floats above the empty slot ready to finish it. Small checker-pattern floor reinforces patterns, bold simple logic game composition."
+    },
+    {
+      "id": "robot-route",
+      "title": "Robot sayohati",
+      "file": "RobotSayohati",
+      "logo": "ROBOT|SAYOHATI",
+      "palette": "turquoise, orange and jade",
+      "scene": "Friendly orange-visor cream wheeled robot explores a small isometric obstacle course island. A glowing route winds between two chunky rocks and a toy tree to a checkered flag. Foreground robot hero holds a small map, path choices and adventure, no command tile emphasis to distinguish robot control game."
+    }
+  ]
+}

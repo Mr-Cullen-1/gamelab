@@ -14,6 +14,10 @@ const gameCovers={
  mathFishingBanner:'MathFishing-banner.webp',mathFishingCompact:'MathFishing-compact.webp'
 };
 for(const [key,file] of Object.entries(gameCovers))assets[key]='data:image/webp;base64,'+fs.readFileSync(path.join(dir,file)).toString('base64');
+const catalogBanners=JSON.parse(fs.readFileSync(path.join(dir,'catalog-banner-manifest.json'),'utf8'));
+assets.catalogCovers=Object.fromEntries(catalogBanners.games.map(({id,file})=>[id,Object.fromEntries(
+ [['wide','banner'],['compact','compact']].map(([key,suffix])=>[key,'data:image/webp;base64,'+fs.readFileSync(path.join(dir,`${file}-${suffix}.webp`)).toString('base64')])
+)]));
 const font=fs.readFileSync(path.join(dir,'nunito.woff2'));
 const fontIsTrueType=font.subarray(0,4).equals(Buffer.from([0,1,0,0]));
 const read=name=>fs.readFileSync(path.join(dir,name),'utf8');
